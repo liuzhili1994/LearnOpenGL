@@ -1,0 +1,21 @@
+#version 330 core				    
+//in vec4 vectexColor;	
+in vec2 texCoord;
+out vec4 FragColor;
+
+uniform float mixValue;
+
+uniform sampler2D textureBuffer1;
+uniform sampler2D textureBuffer2;
+
+void main() {						
+		//FragColor = vectexColor;
+		//FragColor =mix(texture(textureBuffer1,texCoord),texture(textureBuffer2,texCoord),0.2f) * vectexColor;
+		//让笑脸图案朝另一个方向看
+		//FragColor =mix(texture(textureBuffer1,vec2(1-texCoord.x,texCoord.y)),texture(textureBuffer2,texCoord),0.5f);
+		//四个角落各有一个笑脸（0.8表示，第二个图片alpha值为0.8，第一张图片为1-0.8=0.2）
+		//FragColor =mix(texture(textureBuffer1,vec2(texCoord.x,texCoord.y)*2),texture(textureBuffer2,texCoord),0.8f);
+		//改变矩形图片的uv（st）使其只显示一部分
+		FragColor =mix(texture(textureBuffer1,vec2(texCoord.x,texCoord.y)*2),texture(textureBuffer2,texCoord),mixValue);
+		//FragColor = texture(textureBuffer2,texCoord);
+} 	    

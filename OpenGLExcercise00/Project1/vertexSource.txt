@@ -1,0 +1,26 @@
+#version 330 core				     
+layout(location = 10) in vec3 aPos;
+layout(location = 1) in vec3 aColor;
+layout(location = 2) in vec2 aTexCoord;
+
+out vec4 vectexColor ;		
+out vec2 texCoord;
+
+uniform mat4 transform;
+//旋转矩阵
+uniform mat4 rotMat;
+//转换到相机视野 的矩阵
+uniform mat4 viewMat;
+//裁剪的矩阵
+uniform mat4 proMat;
+
+void main() {								
+		//单独改变位置
+		//gl_Position = transform * vec4(aPos, 1.0);     
+
+		//从右到左 进行
+		gl_Position = proMat * viewMat * rotMat * vec4(aPos,1.0);
+
+        vectexColor = vec4(aColor,1.0); 
+		texCoord = aTexCoord;
+} 
